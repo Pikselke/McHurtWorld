@@ -2,7 +2,6 @@ package pl.pikselke.mchw.enums;
 
 public enum McHwEnum {
 	
-	PRACE,
 	OFFLINE,
 	ONLINE,
 	;
@@ -13,7 +12,7 @@ public enum McHwEnum {
 		tryb=mode;
 	}
 	
-	public static McHwEnum getSerwerMode(){
+	public static McHwEnum getServerMode(){
 		return tryb;
 	}
 }

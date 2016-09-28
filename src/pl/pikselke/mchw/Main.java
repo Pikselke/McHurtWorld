@@ -4,46 +4,44 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import pl.pikselke.mchw.craftings.listeners.InventoryClick;
+import pl.pikselke.mchw.bag.BackPack;
 import pl.pikselke.mchw.enums.McHwEnum;
-import pl.pikselke.mchw.listeners.PlayerInteractWorkBeanch;
-import pl.pikselke.mchw.listeners.PlayerJoinQuit;
-import pl.pikselke.mchw.weapons.Awp;
-import pl.pikselke.mchw.weapons.M4Auto;
-import pl.pikselke.mchw.weapons.M4Semi;
-import pl.pikselke.mchw.weapons.Pistol;
-import pl.pikselke.mchw.weapons.ShotGun;
+import pl.pikselke.mchw.listeners.PlayerInteractWorkBeanchListener;
+import pl.pikselke.mchw.listeners.PlayerJoinQuitListener;
+import pl.pikselke.mchw.scoreboard.ScoreBoardListener;
+import pl.pikselke.mchw.weapons.PlayerInteractListener;
 
 public class Main extends JavaPlugin{
 	
-	public static Main plugin;
+	private static Main plugin;
 	
 	public void onEnable(){
-		McHwEnum.setMode(McHwEnum.PRACE);
+		McHwEnum.setMode(McHwEnum.OFFLINE);
 		plugin = this;
-		CreateListeners();
+		createListeners();
+		createCommands();
 		
 	}
 	
+	public void onDisable(){
+		BackPack.saveBackPack();
+	}
 	
-	public static void CreateCommands(){
+	
+	private static void createCommands(){
 		
 	}
 	
-	public static void CreateListeners(){
-		Bukkit.getPluginManager().registerEvents((Listener) new PlayerJoinQuit(), Main.getPlugin());
-		Bukkit.getPluginManager().registerEvents((Listener) new InventoryClick(), Main.getPlugin());
-		Bukkit.getPluginManager().registerEvents((Listener) new PlayerInteractWorkBeanch(), Main.getPlugin());
-		Bukkit.getPluginManager().registerEvents((Listener) new ShotGun(), Main.getPlugin());
-		Bukkit.getPluginManager().registerEvents((Listener) new Awp(), Main.getPlugin());
-		Bukkit.getPluginManager().registerEvents((Listener) new M4Auto(), Main.getPlugin());
-		Bukkit.getPluginManager().registerEvents((Listener) new M4Semi(), Main.getPlugin());
-		Bukkit.getPluginManager().registerEvents((Listener) new Pistol(), Main.getPlugin());
+	private static void createListeners(){
+		Bukkit.getPluginManager().registerEvents((Listener) new ScoreBoardListener(), Main.getPlugin());
+		Bukkit.getPluginManager().registerEvents((Listener) new PlayerJoinQuitListener(), Main.getPlugin());
+		Bukkit.getPluginManager().registerEvents((Listener) new PlayerInteractWorkBeanchListener(), Main.getPlugin());
+		Bukkit.getPluginManager().registerEvents((Listener) new PlayerInteractListener(), Main.getPlugin());
+		Bukkit.getPluginManager().registerEvents((Listener) new ScoreBoardListener(), Main.getPlugin());
+		Bukkit.getPluginManager().registerEvents((Listener) new BackPack(), Main.getPlugin());
 	}
 	
-	public static void CreateReszte(){
-		
-	}
+	
 	
 	public static Main getPlugin(){
 		return plugin;
